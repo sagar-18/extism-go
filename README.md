@@ -2,6 +2,8 @@
 
 This repo houses the Go SDK for integrating with the [Extism](https://extism.org/) runtime. Install this library into your host Go applications to run Extism plugins.
 
+This is a maintained fork of [extism/go-sdk](https://github.com/extism/go-sdk), whose last release was v1.7.1 (March 2025). It tracks current Go and wazero releases. The module path is `github.com/sagar-18/extism-go`; otherwise the API is the same as v1.7.1.
+
 Join the [Extism Discord](https://extism.org/discord) and chat with us!
 
 ## Installation
@@ -9,12 +11,12 @@ Join the [Extism Discord](https://extism.org/discord) and chat with us!
 Install via `go get`:
 
 ```
-go get github.com/extism/go-sdk
+go get github.com/sagar-18/extism-go
 ```
 
 ## Reference Docs
 
-You can find the reference docs at [https://pkg.go.dev/github.com/extism/go-sdk](https://pkg.go.dev/github.com/extism/go-sdk).
+You can find the reference docs at [https://pkg.go.dev/github.com/sagar-18/extism-go](https://pkg.go.dev/github.com/sagar-18/extism-go).
 
 ## Getting Started
 
@@ -33,7 +35,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/extism/go-sdk"
+	"github.com/sagar-18/extism-go"
 	"os"
 )
 
@@ -56,11 +58,11 @@ func main() {
 	}
 }
 ```
-> **Note**: See [the Manifest docs](https://pkg.go.dev/github.com/extism/go-sdk#Manifest) as it has a rich schema and a lot of options.
+> **Note**: See [the Manifest docs](https://pkg.go.dev/github.com/sagar-18/extism-go#Manifest) as it has a rich schema and a lot of options.
 
 ### Calling A Plug-in's Exports
 
-This plug-in was written in Rust and it does one thing, it counts vowels in a string. As such, it exposes one "export" function: `count_vowels`. We can call exports using [extism.Plugin.Call](https://pkg.go.dev/github.com/extism/go-sdk#Plugin.Call).
+This plug-in was written in Rust and it does one thing, it counts vowels in a string. As such, it exposes one "export" function: `count_vowels`. We can call exports using [extism.Plugin.Call](https://pkg.go.dev/github.com/sagar-18/extism-go#Plugin.Call).
 Let's add that code to our main func:
 
 ```go
@@ -89,7 +91,7 @@ $ go run main.go
 
 All exports have a simple interface of optional bytes in, and optional bytes out. This plug-in happens to take a string and return a JSON encoded string with a report of results.
 
-> **Note**: If you want to pass a custom `context.Context` when calling a plugin function, you can use the [extism.Plugin.CallWithContext](https://pkg.go.dev/github.com/extism/go-sdk#Plugin.CallWithContext) method instead.
+> **Note**: If you want to pass a custom `context.Context` when calling a plugin function, you can use the [extism.Plugin.CallWithContext](https://pkg.go.dev/github.com/sagar-18/extism-go#Plugin.CallWithContext) method instead.
 
 
 ### Plug-in State
@@ -227,7 +229,7 @@ kvWrite := extism.NewHostFunctionWithStack(
 )
 ```
 
-> *Note*: In order to write host functions you should get familiar with the methods on the [extism.CurrentPlugin](https://pkg.go.dev/github.com/extism/go-sdk#CurrentPlugin) type. The `p` parameter is an instance of this type.
+> *Note*: In order to write host functions you should get familiar with the methods on the [extism.CurrentPlugin](https://pkg.go.dev/github.com/sagar-18/extism-go#CurrentPlugin) type. The `p` parameter is an instance of this type.
 
 We need to pass these imports to the plug-in to create them. All imports of a plug-in must be satisfied for it to be initialized:
 
@@ -376,7 +378,7 @@ import (
 	"fmt"
 	"os"
 
-	extism "github.com/extism/go-sdk"
+	extism "github.com/sagar-18/extism-go"
 )
 
 func main() {
